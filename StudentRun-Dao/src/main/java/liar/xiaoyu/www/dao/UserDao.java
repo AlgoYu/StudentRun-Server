@@ -15,8 +15,8 @@ public interface UserDao {
     @Update("UPDATE user SET " +
             "phone=#{phone},username=#{username},sex=#{sex},password=#{password}," +
             "portrait=#{portrait},school=#{school},address=#{address},status=#{status} " +
-            "WHERE id = ${id};")
-    Integer updateUserByID(@Param("id") Integer id, User user);
+            "WHERE id = #{id};")
+    Integer updateUserByID(User user);
 
     @Select("SELECT * FROM `user` WHERE id = ${value};")
     User selectUserByID(Integer id);
