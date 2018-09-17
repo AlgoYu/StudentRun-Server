@@ -1,6 +1,3 @@
-package liar.xiaoyu.www.entity;
-
-
 public class User {
 
   private Integer id;
@@ -12,6 +9,10 @@ public class User {
   private Integer school;
   private String address;
   private Integer status;
+
+  public User(Integer id) {
+    this.id = id;
+  }
 
   public Integer getId() {
     return id;

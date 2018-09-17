@@ -1,34 +1,102 @@
 package liar.xiaoyu.www.service.serviceimpl;
 
 import liar.xiaoyu.www.dao.UserDao;
+import liar.xiaoyu.www.entity.ResponseMessageCommon;
 import liar.xiaoyu.www.entity.User;
 import liar.xiaoyu.www.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class UserServiceImpl implements UserService {
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
+@Service
+public class UserServiceImpl implements UserService<ResponseMessageCommon<?>> {
     @Autowired
     UserDao userDao;
 
     @Override
-    public Integer addUser(User user) {
-        return userDao.insertUser(user);
+    public ResponseMessageCommon<Integer> addUser(@NotNull User user) {
+        ResponseMessageCommon<Integer> message = new ResponseMessageCommon<>();
+        Integer integer = userDao.insertUser(user);
+        if(integer > 0){
+            message.setSUCCESS(true);
+            message.setDATA(integer);
+            message.setMESSAGE("插入成功！");
+        }
+        return message;
     }
 
     @Override
-    public Integer deleteUserByID(Integer id) {
-        return userDao.deleteUserByID(id);
+    public ResponseMessageCommon<Integer> deleteUserByID(@NotNull Integer id) {
+        ResponseMessageCommon<Integer> message = new ResponseMessageCommon<>();
+        Integer integer = userDao.deleteUserByID(id);
+        if(integer > 0){
+            message.setSUCCESS(true);
+            message.setDATA(integer);
+            message.setMESSAGE("插入成功！");
+        }
+        return message;
     }
 
     @Override
-    public Integer updateUserByID(User user) {
-        return userDao.updateUserByID(user);
+    public ResponseMessageCommon<Integer> deleteUserByList(@NotEmpty List<Integer> ids) {
+        ResponseMessageCommon<Integer> message = new ResponseMessageCommon<>();
+        Integer integer = 0;
+        for (Integer id:ids) {
+            try {
+                if(0 <userDao.deleteUserByID(id)){
+                    integer++;
+                }
+            }catch (Exception e){
+                integer = 0;
+                message.setErrorCode(1);
+                message.setErrorMessage("这个集合执行错误:"+e.toString());
+                break;
+            }
+        }
+        if(integer > 0){
+            message.setSUCCESS(true);
+            message.setDATA(integer);
+            message.setMESSAGE("插入成功！");
+        }
+        return message;
     }
 
     @Override
-    public User getUserByID(Integer id) {
-        return userDao.selectUserByID(id);
+    public ResponseMessageCommon<Integer> updateUserByID(User user) {
+        ResponseMessageCommon<Integer> message = new ResponseMessageCommon<>();
+        Integer integer = userDao.updateUserByID(user);
+        if(integer > 0){
+            message.setSUCCESS(true);
+            message.setMESSAGE("更新成功！");
+            message.setDATA(integer);
+        }
+        return message;
+    }
+
+    @Override
+    public ResponseMessageCommon<User> getUserByID(Integer id) {
+        ResponseMessageCommon<User> message = new ResponseMessageCommon<>();
+        User user = userDao.selectUserByID(id);
+        if(user!=null){
+            message.setSUCCESS(true);
+            message.setMESSAGE("查询成功！");
+            message.setDATA(user);
+        }
+        return message;
+    }
+
+    @Override
+    public ResponseMessageCommon<List<User>> getAllUser() {
+        ResponseMessageCommon<List<User>> message = new ResponseMessageCommon<>();
+        List<User> users = userDao.selectAllUser();
+        if(users != null && users.size() > 0){
+            message.setSUCCESS(true);
+            message.setMESSAGE("所有用户信息！");
+            message.setDATA(users);
+        }
+        return message;
     }
 }
