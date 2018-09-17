@@ -70,4 +70,13 @@ public interface UserDao {
      */
     @Select("SELECT * FROM `user`")
     List<User> selectAllUser();
+
+    /**
+     * 功能：校验手机号码是否已存在
+     * 参数：手机号码
+     * 返回值：记录总数
+     * @return
+     */
+    @Select("SELECT COUNT(*) FROM `user` WHERE phone = '${phone}';")
+    Integer validationPhone(String phone);
 }

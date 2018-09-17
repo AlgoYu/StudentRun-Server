@@ -4,6 +4,7 @@ import liar.xiaoyu.www.dao.UserDao;
 import liar.xiaoyu.www.entity.ResponseMessageCommon;
 import liar.xiaoyu.www.entity.User;
 import liar.xiaoyu.www.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,18 @@ public class UserServiceImpl implements UserService<ResponseMessageCommon<?>> {
     @Override
     public ResponseMessageCommon<Integer> addUser(@NotNull User user) {
         ResponseMessageCommon<Integer> message = new ResponseMessageCommon<>();
-        Integer integer = userDao.insertUser(user);
-        if(integer > 0){
-            message.setSUCCESS(true);
-            message.setDATA(integer);
-            message.setMESSAGE("插入成功！");
+
+        Integer result = userDao.validationPhone(user.getPhone());
+        if(result==0){
+            Integer integer = userDao.insertUser(user);
+            if(integer > 0){
+                message.setSUCCESS(true);
+                message.setDATA(integer);
+                message.setMESSAGE("插入成功！");
+            }
+        }else{
+            message.setErrorCode(2);
+            message.setErrorMessage("该手机号码已经被注册了！");
         }
         return message;
     }
@@ -50,7 +58,7 @@ public class UserServiceImpl implements UserService<ResponseMessageCommon<?>> {
                     integer++;
                 }
             }catch (Exception e){
-                integer = 0;
+                integer = 1;
                 message.setErrorCode(1);
                 message.setErrorMessage("这个集合执行错误:"+e.toString());
                 break;
@@ -96,6 +104,22 @@ public class UserServiceImpl implements UserService<ResponseMessageCommon<?>> {
             message.setSUCCESS(true);
             message.setMESSAGE("所有用户信息！");
             message.setDATA(users);
+        }
+        return message;
+    }
+
+    @Override
+    public ResponseMessageCommon<Integer> validationPhone(String phone) {
+        ResponseMessageCommon<Integer> message = new ResponseMessageCommon<>();
+        Integer result = userDao.validationPhone(phone);
+        if(result == 0){
+            message.setSUCCESS(true);
+            message.setDATA(result);
+            message.setMESSAGE("该手机号码还未注册！");
+        }else{
+            message.setSUCCESS(true);
+            message.setDATA(result);
+            message.setMESSAGE("该手机号码已经存在！");
         }
         return message;
     }

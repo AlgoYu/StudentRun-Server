@@ -48,10 +48,18 @@ public interface UserService<T extends AbstractResponseMessage>{
      */
     T getUserByID(Integer id);
     /**
-     * 功能：得到所有用户
+     * 功能：得到所有用户信息
      * 参数：无
      * 返回值：返回类
      * @return
      */
     T getAllUser();
+
+    /**
+     * 功能：校验手机号码是否已存在
+     * 参数：手机号码
+     * 返回值：返回类
+     * @return
+     */
+    T validationPhone(String phone);
 }
