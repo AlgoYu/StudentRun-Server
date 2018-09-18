@@ -60,7 +60,7 @@ public interface UserDao {
      * @return
      */
     @Select("SELECT * FROM `user` WHERE phone = ${phone};")
-    User selectUserByPhone(String phone);
+    User selectUserByPhone(@Param("phone") String phone);
 
     /**
      * 功能：得到所有用户信息
@@ -77,6 +77,6 @@ public interface UserDao {
      * 返回值：记录总数
      * @return
      */
-    @Select("SELECT COUNT(*) FROM `user` WHERE phone = '${phone}';")
-    Integer validationPhone(String phone);
+    @Select("SELECT COUNT(*) FROM `user` WHERE phone = ${phone};")
+    Integer validationPhone(@Param("phone") String phone);
 }

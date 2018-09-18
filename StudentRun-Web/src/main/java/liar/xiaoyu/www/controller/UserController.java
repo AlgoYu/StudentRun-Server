@@ -1,8 +1,9 @@
 package liar.xiaoyu.www.controller;
 
-import liar.xiaoyu.www.entity.ResponseMessageCommon;
+import liar.xiaoyu.www.entity.ResponseMessage;
 import liar.xiaoyu.www.entity.User;
 import liar.xiaoyu.www.service.UserService;
+import liar.xiaoyu.www.utils.MD5Util;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,34 +17,40 @@ public class UserController {
     private final String url = "/User";
 
     @GetMapping(value = url+"s")
-    public ResponseMessageCommon<List<User>> getAllUser(){
-        return (ResponseMessageCommon<List<User>>) userService.getAllUser();
+    public ResponseMessage<List<User>> getAllUser(){
+        return userService.getAllUser();
     }
 
     @PostMapping(value = url)
-    public ResponseMessageCommon<Integer> addUser(@RequestBody User user){
-        return (ResponseMessageCommon<Integer>) userService.addUser(user);
+    public ResponseMessage<Integer> addUser(@RequestBody User user){
+        user.setPassword(MD5Util.XMD5(user.getPassword()));
+        return userService.addUser(user);
     }
 
     @PutMapping(value = url)
-    public ResponseMessageCommon<Integer> updateUser(@RequestBody User user){
-        return (ResponseMessageCommon<Integer>) userService.updateUserByID(user);
+    public ResponseMessage<Integer> updateUser(@RequestBody User user){
+        return userService.updateUserByID(user);
     }
 
     @DeleteMapping(value = url)
-    public ResponseMessageCommon<Integer> deleteUser(@Param("id")String postid){
+    public ResponseMessage<Integer> deleteUser(@Param("id")String postid){
         Integer id = Integer.parseInt(postid);
-        return (ResponseMessageCommon<Integer>) userService.deleteUserByID(id);
+        return userService.deleteUserByID(id);
     }
 
     @GetMapping(value = url)
-    public ResponseMessageCommon<User> getUserByID(@Param("id") String postid){
+    public ResponseMessage<User> getUserByID(@Param("id") String postid){
         Integer id = Integer.parseInt(postid);
-        return (ResponseMessageCommon<User>) userService.getUserByID(id);
+        return userService.getUserByID(id);
     }
 
-    @GetMapping("validPhone")
-    public ResponseMessageCommon<Integer> validPhone(@Param("phone") String phone){
-        return (ResponseMessageCommon<Integer>) userService.validationPhone(phone);
+    @PostMapping("/ValidPhone")
+    public ResponseMessage<Integer> validPhone(@Param("phone") String phone){
+        return userService.validationPhone(phone);
+    }
+
+    @PostMapping("ValidLogin")
+    public ResponseMessage<User> validPassword(@Param("phone") String phone,@Param("password") String password){
+        return userService.validationLogin(phone,password);
     }
 }

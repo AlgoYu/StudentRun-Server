@@ -1,15 +1,15 @@
 package liar.xiaoyu.www.entity;
 
-public abstract class AbstractResponseMessage<V> {
-    private boolean SUCCESS = false;
-    private String MESSAGE;
-    private V DATA;
+public class ResponseMessage<V>{
+    public Boolean SUCCESS = false;
+    public String MESSAGE = "暂无";
+    public V DATA;
 
-    public boolean isSUCCESS() {
+    public Boolean getSUCCESS() {
         return SUCCESS;
     }
 
-    public void setSUCCESS(boolean SUCCESS) {
+    public void setSUCCESS(Boolean SUCCESS) {
         this.SUCCESS = SUCCESS;
     }
 

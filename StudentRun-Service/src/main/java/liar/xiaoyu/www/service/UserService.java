@@ -1,12 +1,12 @@
 package liar.xiaoyu.www.service;
 
-import liar.xiaoyu.www.entity.AbstractResponseMessage;
+import liar.xiaoyu.www.entity.ResponseMessage;
 import liar.xiaoyu.www.entity.User;
 
 import java.util.List;
 
 
-public interface UserService<T extends AbstractResponseMessage>{
+public interface UserService{
     /**
      * 功能：增加用户
      * 参数：用户
@@ -14,7 +14,7 @@ public interface UserService<T extends AbstractResponseMessage>{
      * 返回值：返回类
      * @return
      */
-    T addUser(User user);
+    ResponseMessage addUser(User user);
     /**
      * 功能：通过ID删除用户
      * 参数：用户id
@@ -22,7 +22,7 @@ public interface UserService<T extends AbstractResponseMessage>{
      * 返回值：返回类
      * @return
      */
-    T deleteUserByID(Integer id);
+    ResponseMessage deleteUserByID(Integer id);
     /**
      * 功能：批量删除用户
      * 参数：
@@ -30,7 +30,7 @@ public interface UserService<T extends AbstractResponseMessage>{
      * 返回值：返回类
      * @return
      */
-    T deleteUserByList(List<Integer> ids);
+    ResponseMessage deleteUserByList(List<Integer> ids);
     /**
      * 功能：通过ID更新User
      * 参数：
@@ -38,7 +38,7 @@ public interface UserService<T extends AbstractResponseMessage>{
      * 返回值：返回类
      * @return
      */
-    T updateUserByID(User user);
+    ResponseMessage updateUserByID(User user);
     /**
      * 功能：
      * 参数：
@@ -46,14 +46,14 @@ public interface UserService<T extends AbstractResponseMessage>{
      * 返回值：返回类
      * @return
      */
-    T getUserByID(Integer id);
+    ResponseMessage getUserByID(Integer id);
     /**
      * 功能：得到所有用户信息
      * 参数：无
      * 返回值：返回类
      * @return
      */
-    T getAllUser();
+    ResponseMessage getAllUser();
 
     /**
      * 功能：校验手机号码是否已存在
@@ -61,5 +61,7 @@ public interface UserService<T extends AbstractResponseMessage>{
      * 返回值：返回类
      * @return
      */
-    T validationPhone(String phone);
+    ResponseMessage validationPhone(String phone);
+
+    ResponseMessage validationLogin(String phone,String password);
 }
