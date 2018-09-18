@@ -18,37 +18,36 @@ public class UserServiceImpl implements UserService{
     UserDao userDao;
 
     @Override
-    public ResponseMessage<Integer> addUser(@NotNull User user) {
+    public ResponseMessage<Integer> addUser(User user) {
         ResponseMessage<Integer> message = new ResponseMessage<>();
-
         Integer result = userDao.validationPhone(user.getPhone());
         if(result==0){
             Integer integer = userDao.insertUser(user);
             if(integer > 0){
-                message.setSUCCESS(true);
-                message.setDATA(integer);
-                message.setMESSAGE("注册成功！");
+                message.setSucces(true);
+                message.setData(integer);
+                message.setMessage("注册成功！");
             }
         }else{
-            message.setMESSAGE("未知错误！请检查您的格式！");
+            message.setMessage("该手机号码已经被注册！");
         }
         return message;
     }
 
     @Override
-    public ResponseMessage<Integer> deleteUserByID(@NotNull Integer id) {
+    public ResponseMessage<Integer> deleteUserByID(Integer id) {
         ResponseMessage<Integer> message = new ResponseMessage<>();
         Integer integer = userDao.deleteUserByID(id);
         if(integer > 0){
-            message.setSUCCESS(true);
-            message.setDATA(integer);
-            message.setMESSAGE("插入成功！");
+            message.setSucces(true);
+            message.setData(integer);
+            message.setMessage("插入成功！");
         }
         return message;
     }
 
     @Override
-    public ResponseMessage<Integer> deleteUserByList(@NotEmpty List<Integer> ids) {
+    public ResponseMessage<Integer> deleteUserByList(List<Integer> ids) {
         ResponseMessage<Integer> message = new ResponseMessage<>();
         Integer integer = 0;
         for (Integer id:ids) {
@@ -58,14 +57,14 @@ public class UserServiceImpl implements UserService{
                 }
             }catch (Exception e){
                 integer = 0;
-                message.setMESSAGE("批量删除错误！");
+                message.setMessage("批量删除错误！");
                 break;
             }
         }
         if(integer > 0){
-            message.setSUCCESS(true);
-            message.setDATA(integer);
-            message.setMESSAGE("插入成功！");
+            message.setSucces(true);
+            message.setData(integer);
+            message.setMessage("插入成功！");
         }
         return message;
     }
@@ -73,13 +72,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public ResponseMessage<Integer> updateUserByID(User user) {
         ResponseMessage<Integer> message = new ResponseMessage<>();
-        Integer integer = userDao.updateUserByID(user);
-        if(integer > 0){
-            message.setSUCCESS(true);
-            message.setMESSAGE("更新成功！");
-            message.setDATA(integer);
-        }else {
-            message.setMESSAGE("更新失败！");
+        if(userDao.validationPhone(user.getPhone())>0){
+            message.setMessage("已存在的手机号码！");
+        }else{
+            Integer integer = userDao.updateUserByID(user);
+            if(integer > 0){
+                message.setSucces(true);
+                message.setMessage("更新成功！");
+                message.setData(integer);
+            }else {
+                message.setMessage("没有找到这个ID的用户！");
+            }
         }
         return message;
     }
@@ -89,11 +92,11 @@ public class UserServiceImpl implements UserService{
         ResponseMessage<User> message = new ResponseMessage<>();
         User user = userDao.selectUserByID(id);
         if(user!=null){
-            message.setSUCCESS(true);
-            message.setMESSAGE("查询成功！");
-            message.setDATA(user);
+            message.setSucces(true);
+            message.setMessage("查询成功！");
+            message.setData(user);
         }else {
-            message.setMESSAGE("没有查到这个id用户！");
+            message.setMessage("没有查到这个id用户！");
         }
         return message;
     }
@@ -103,11 +106,11 @@ public class UserServiceImpl implements UserService{
         ResponseMessage<List<User>> message = new ResponseMessage<>();
         List<User> users = userDao.selectAllUser();
         if(users != null && users.size() > 0){
-            message.setSUCCESS(true);
-            message.setMESSAGE("所有用户信息！");
-            message.setDATA(users);
+            message.setSucces(true);
+            message.setMessage("所有用户信息！");
+            message.setData(users);
         }else {
-            message.setMESSAGE("未知错误！");
+            message.setMessage("未知错误！");
         }
         return message;
     }
@@ -117,14 +120,15 @@ public class UserServiceImpl implements UserService{
         ResponseMessage<Integer> message = new ResponseMessage<>();
         Integer result = userDao.validationPhone(phone);
         if(result == 0){
-            message.setSUCCESS(true);
-            message.setDATA(result);
-            message.setMESSAGE("该手机号码还未注册！");
+            message.setSucces(true);
+            message.setData(result);
+            message.setMessage("该手机号码还未注册！");
         }else{
-            message.setSUCCESS(false);
-            message.setDATA(result);
-            message.setMESSAGE("该手机号码已经存在！");
+            message.setSucces(false);
+            message.setData(result);
+            message.setMessage("该手机号码已经存在！");
         }
+        System.out.println(message.toString());
         return message;
     }
 
@@ -135,12 +139,12 @@ public class UserServiceImpl implements UserService{
         if(user != null){
             password = MD5Util.XMD5(password);
             if(user.getPassword().equals(password)){
-                message.setSUCCESS(true);
-                message.setMESSAGE("验证成功！");
-                message.setDATA(user);
+                message.setSucces(true);
+                message.setMessage("验证成功！");
+                message.setData(user);
             }
         }else{
-            message.setMESSAGE("验证失败！");
+            message.setMessage("验证失败！");
         }
         return message;
     }

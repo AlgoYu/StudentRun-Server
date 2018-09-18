@@ -3,24 +3,22 @@ package liar.xiaoyu.www.entity;
 
 public class UserOrder {
 
-  private long id;
+  private Integer id;
   private String orderUuid;
-  private long userId;
-  private double money;
-  private long staff;
+  private Integer userId;
+  private Float money;
+  private Integer staff;
   private String info;
-  private long status;
-  private java.sql.Timestamp datetime;
+  private Integer status;
+  private String datetime;
 
-
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
 
   public String getOrderUuid() {
     return orderUuid;
@@ -30,33 +28,29 @@ public class UserOrder {
     this.orderUuid = orderUuid;
   }
 
-
-  public long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
 
-
-  public double getMoney() {
+  public Float getMoney() {
     return money;
   }
 
-  public void setMoney(double money) {
+  public void setMoney(Float money) {
     this.money = money;
   }
 
-
-  public long getStaff() {
+  public Integer getStaff() {
     return staff;
   }
 
-  public void setStaff(long staff) {
+  public void setStaff(Integer staff) {
     this.staff = staff;
   }
-
 
   public String getInfo() {
     return info;
@@ -66,22 +60,19 @@ public class UserOrder {
     this.info = info;
   }
 
-
-  public long getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(long status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 
-
-  public java.sql.Timestamp getDatetime() {
+  public String getDatetime() {
     return datetime;
   }
 
-  public void setDatetime(java.sql.Timestamp datetime) {
+  public void setDatetime(String datetime) {
     this.datetime = datetime;
   }
-
 }

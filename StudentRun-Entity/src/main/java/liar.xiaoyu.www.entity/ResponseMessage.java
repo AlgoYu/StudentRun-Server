@@ -1,31 +1,31 @@
 package liar.xiaoyu.www.entity;
 
 public class ResponseMessage<V>{
-    public Boolean SUCCESS = false;
-    public String MESSAGE = "暂无";
-    public V DATA;
+    public Boolean succes = false;
+    public String message = "暂无";
+    public V data;
 
-    public Boolean getSUCCESS() {
-        return SUCCESS;
+    public Boolean getSucces() {
+        return succes;
     }
 
-    public void setSUCCESS(Boolean SUCCESS) {
-        this.SUCCESS = SUCCESS;
+    public void setSucces(Boolean succes) {
+        this.succes = succes;
     }
 
-    public String getMESSAGE() {
-        return MESSAGE;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMESSAGE(String MESSAGE) {
-        this.MESSAGE = MESSAGE;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public V getDATA() {
-        return DATA;
+    public V getData() {
+        return data;
     }
 
-    public void setDATA(V DATA) {
-        this.DATA = DATA;
+    public void setData(V data) {
+        this.data = data;
     }
 }

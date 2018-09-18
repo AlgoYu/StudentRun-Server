@@ -3,22 +3,20 @@ package liar.xiaoyu.www.entity;
 
 public class Commodity {
 
-  private long id;
+  private Integer id;
   private String name;
   private String img;
-  private double price;
-  private long type;
-  private long status;
+  private Float price;
+  private Integer type;
+  private Integer status;
 
-
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
 
   public String getName() {
     return name;
@@ -28,7 +26,6 @@ public class Commodity {
     this.name = name;
   }
 
-
   public String getImg() {
     return img;
   }
@@ -37,31 +34,27 @@ public class Commodity {
     this.img = img;
   }
 
-
-  public double getPrice() {
+  public Float getPrice() {
     return price;
   }
 
-  public void setPrice(double price) {
+  public void setPrice(Float price) {
     this.price = price;
   }
 
-
-  public long getType() {
+  public Integer getType() {
     return type;
   }
 
-  public void setType(long type) {
+  public void setType(Integer type) {
     this.type = type;
   }
 
-
-  public long getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(long status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
-
 }

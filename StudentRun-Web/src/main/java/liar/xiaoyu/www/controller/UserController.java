@@ -4,7 +4,6 @@ import liar.xiaoyu.www.entity.ResponseMessage;
 import liar.xiaoyu.www.entity.User;
 import liar.xiaoyu.www.service.UserService;
 import liar.xiaoyu.www.utils.MD5Util;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -17,7 +16,7 @@ public class UserController {
     private final String url = "/User";
 
     @GetMapping(value = url+"s")
-    public ResponseMessage<List<User>> getAllUser(){
+    public ResponseMessage<List<User>> getAllUser(@RequestParam("manager") String name,@RequestParam("password")String password){
         return userService.getAllUser();
     }
 
@@ -33,24 +32,24 @@ public class UserController {
     }
 
     @DeleteMapping(value = url)
-    public ResponseMessage<Integer> deleteUser(@Param("id")String postid){
+    public ResponseMessage<Integer> deleteUser(@RequestParam("id") String postid){
         Integer id = Integer.parseInt(postid);
         return userService.deleteUserByID(id);
     }
 
     @GetMapping(value = url)
-    public ResponseMessage<User> getUserByID(@Param("id") String postid){
+    public ResponseMessage<User> getUserByID(@RequestParam(value = "id") String postid){
         Integer id = Integer.parseInt(postid);
         return userService.getUserByID(id);
     }
 
     @PostMapping("/ValidPhone")
-    public ResponseMessage<Integer> validPhone(@Param("phone") String phone){
+    public ResponseMessage<Integer> validPhone(@RequestParam("phone") String phone){
         return userService.validationPhone(phone);
     }
 
     @PostMapping("ValidLogin")
-    public ResponseMessage<User> validPassword(@Param("phone") String phone,@Param("password") String password){
+    public ResponseMessage<User> validPassword(@RequestParam("phone") String phone,@RequestParam("password") String password){
         return userService.validationLogin(phone,password);
     }
 }

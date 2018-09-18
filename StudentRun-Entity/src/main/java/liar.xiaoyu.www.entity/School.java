@@ -3,18 +3,16 @@ package liar.xiaoyu.www.entity;
 
 public class School {
 
-  private long id;
+  private Integer id;
   private String school;
 
-
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
 
   public String getSchool() {
     return school;
@@ -23,5 +21,4 @@ public class School {
   public void setSchool(String school) {
     this.school = school;
   }
-
 }
