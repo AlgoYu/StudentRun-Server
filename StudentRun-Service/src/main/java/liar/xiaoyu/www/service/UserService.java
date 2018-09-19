@@ -1,8 +1,6 @@
 package liar.xiaoyu.www.service;
 
-import liar.xiaoyu.www.entity.ResponseMessage;
 import liar.xiaoyu.www.entity.User;
-
 import java.util.List;
 
 
@@ -14,7 +12,7 @@ public interface UserService{
      * 返回值：返回类
      * @return
      */
-    ResponseMessage addUser(User user);
+    Integer addUser(User user);
     /**
      * 功能：通过ID删除用户
      * 参数：用户id
@@ -22,15 +20,7 @@ public interface UserService{
      * 返回值：返回类
      * @return
      */
-    ResponseMessage deleteUserByID(Integer id);
-    /**
-     * 功能：批量删除用户
-     * 参数：
-     * @param ids
-     * 返回值：返回类
-     * @return
-     */
-    ResponseMessage deleteUserByList(List<Integer> ids);
+    Integer deleteUserByID(Integer id);
     /**
      * 功能：通过ID更新User
      * 参数：
@@ -38,7 +28,7 @@ public interface UserService{
      * 返回值：返回类
      * @return
      */
-    ResponseMessage updateUserByID(User user);
+    Integer updateUserByID(User user);
     /**
      * 功能：
      * 参数：
@@ -46,14 +36,14 @@ public interface UserService{
      * 返回值：返回类
      * @return
      */
-    ResponseMessage getUserByID(Integer id);
+    User getUserByID(Integer id);
     /**
      * 功能：得到所有用户信息
      * 参数：无
      * 返回值：返回类
      * @return
      */
-    ResponseMessage getAllUser();
+    List<User> getAllUser();
 
     /**
      * 功能：校验手机号码是否已存在
@@ -61,7 +51,7 @@ public interface UserService{
      * 返回值：返回类
      * @return
      */
-    ResponseMessage validationPhone(String phone);
+    Integer validationPhone(String phone);
     /**
      * 功能：校验登陆
      * 参数：手机号码、密码
@@ -70,5 +60,5 @@ public interface UserService{
      * 返回值：返回类
      * @return
      */
-    ResponseMessage validationLogin(String phone,String password);
+    Boolean validationLogin(String phone,String password);
 }

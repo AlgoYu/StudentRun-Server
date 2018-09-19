@@ -14,7 +14,7 @@ public class UserOrderServiceImpl implements UserOrderService {
 
     @Override
     public Integer addUserOrder(UserOrder userOrder) {
-        return userOrderDao.addOrder(userOrder);
+        return userOrderDao.insertOrder(userOrder);
     }
 
     @Override

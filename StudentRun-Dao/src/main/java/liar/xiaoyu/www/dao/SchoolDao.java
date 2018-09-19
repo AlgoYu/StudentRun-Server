@@ -17,7 +17,7 @@ public interface SchoolDao {
      * @return
      */
     @Insert("INSERT INTO school(name) VALUES(#{name});")
-    Integer addSchool(School school);
+    Integer insertSchool(School school);
     /**
      * 功能：删除学校
      * 参数：学校id

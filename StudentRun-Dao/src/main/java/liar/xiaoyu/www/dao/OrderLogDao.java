@@ -19,7 +19,7 @@ public interface OrderLogDao {
 
     @Insert("INSERT INTO order_log(order_uuid,commodity,money,number) " +
             "VALUES(#{orderUuid},#{commodity},#{money},#{number});")
-    Integer addOrderLog(OrderLog orderLog);
+    Integer insertOrderLog(OrderLog orderLog);
 
     @Delete("DELETE FROM order_log WHERE id = ${id}")
     Integer deleteOrderLogByID(@Param("id") Integer id);

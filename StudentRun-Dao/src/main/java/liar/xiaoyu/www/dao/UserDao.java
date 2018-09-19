@@ -55,16 +55,6 @@ public interface UserDao {
     User selectUserByID(Integer id);
 
     /**
-     * 功能：通过手机号码查找用户
-     * 参数：手机号码
-     * @param phone
-     * 返回值：用户
-     * @return
-     */
-    @Select("SELECT * FROM `user` WHERE phone = '${phone}';")
-    User selectUserByPhone(@Param("phone") String phone);
-
-    /**
      * 功能：得到所有用户信息
      * 参数：无
      * 返回值：所有用户
@@ -79,6 +69,15 @@ public interface UserDao {
      * 返回值：记录总数
      * @return
      */
-    @Select("SELECT COUNT(*) FROM `user` WHERE phone = '${phone}';")
-    Integer validationPhone(@Param("phone") String phone);
+    @Select("SELECT COUNT(*) FROM user WHERE phone = '${phone}';")
+    Integer selectCountByPhone(@Param("phone") String phone);
+
+    /**
+     * 功能：通过手机号码查找用户
+     * 参数：手机号码
+     * 返回值：用户类
+     * @return
+     */
+    @Select("SELECT COUNT(*) FROM user WHERE phone = '${phone}';")
+    User selectUserByPhone(@Param("phone") String phone);
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface FeedBackDao {
     @Insert("INSERT INTO feedback(uuid,type,content,status,reply) " +
             "VALUES(#{uuid},#{type},#{content},#{status},#{reply});")
-    Integer addFeedBack(Feedback feedback);
+    Integer insertFeedBack(Feedback feedback);
 
     @Delete("DELETE FROM feedback WHERE id = ${id}")
     Integer deleteFeedBackByID(@Param("id") Integer id);

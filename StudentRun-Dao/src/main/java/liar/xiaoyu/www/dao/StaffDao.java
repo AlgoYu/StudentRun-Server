@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 @Mapper
 public interface StaffDao {
-    @Insert("INSERT INTO staff VALUES(NULL,#{phone},#{name},#{sex},#{password},#{portrait}," +
-            "#{school},#{status},#{level});")
-    Integer addStaff(Staff staff);
+    @Insert("INSERT INTO staff(phone,name,sex,password,portrait,school,status,level)" +
+            " VALUES(NULL,#{phone},#{name},#{sex},#{password},#{portrait},#{school},#{status},#{level});")
+    Integer insertStaff(Staff staff);
     @Delete("DELETE FROM staff WHERE id = ${id};")
     Integer deleteStaffByID(@Param("id")Integer id);
     @Update("UPDATE staff SET phone=#{phone},name=#{name},sex=#{sex}," +

@@ -14,7 +14,7 @@ public class FeedBackServiceImpl implements FeedBackService {
 
     @Override
     public Integer addFeedBack(Feedback feedback) {
-        return feedBackDao.addFeedBack(feedback);
+        return feedBackDao.insertFeedBack(feedback);
     }
 
     @Override

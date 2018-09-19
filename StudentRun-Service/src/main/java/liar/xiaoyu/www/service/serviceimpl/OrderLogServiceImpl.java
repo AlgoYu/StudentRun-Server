@@ -15,7 +15,7 @@ public class OrderLogServiceImpl implements OrderLogService {
 
     @Override
     public Integer addOrderLog(OrderLog orderLog) {
-        return orderLogDao.addOrderLog(orderLog);
+        return orderLogDao.insertOrderLog(orderLog);
     }
 
     @Override

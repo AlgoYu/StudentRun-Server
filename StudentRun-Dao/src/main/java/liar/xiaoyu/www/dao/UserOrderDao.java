@@ -22,7 +22,7 @@ public interface UserOrderDao {
 
     @Insert("INSERT INTO user_order(order_uuid,user_id,money,staff,info,status) " +
             "VALUES(#{orderUuid},#{userId},#{money},#{staff},#{info},#{status});")
-    Integer addOrder(UserOrder userOrder);
+    Integer insertOrder(UserOrder userOrder);
 
     @Delete("DELETE FROM user_order WHERE id = ${id}")
     Integer deleteOrderByID(@Param("id")Integer id);

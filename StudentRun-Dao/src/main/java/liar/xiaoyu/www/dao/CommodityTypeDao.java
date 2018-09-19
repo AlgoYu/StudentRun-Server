@@ -12,12 +12,12 @@ public interface CommodityTypeDao {
     /**
      * 功能：增加商品类型
      * 参数：商品类型姓名
-     * @param name
+     * @param commodityType
      * 返回值：增加行数
      * @return
      */
-    @Insert("INSERT INTO commodity_type VALUES(NULL,'${name}');")
-    Integer addCommodityType(@Param("name")String name);
+    @Insert("INSERT INTO commodity_type(name) VALUES(#{name});")
+    Integer insertCommodityType(CommodityType commodityType);
     /**
      * 功能：删除商品类型
      * 参数：商品类型id

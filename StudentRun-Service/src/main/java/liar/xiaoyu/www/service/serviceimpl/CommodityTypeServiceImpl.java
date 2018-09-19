@@ -19,6 +19,11 @@ public class CommodityTypeServiceImpl implements CommodityTypeService {
     }
 
     @Override
+    public Integer addCommodityTypeByID(CommodityType commodityType) {
+        return commodityTypeDao.insertCommodityType(commodityType);
+    }
+
+    @Override
     public Integer updateCommodityTypeByID(CommodityType commodityType) {
         return commodityTypeDao.updateCommodityTypeByID(commodityType);
     }

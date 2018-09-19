@@ -1,9 +1,9 @@
 package liar.xiaoyu.www.controller;
 
+import liar.xiaoyu.www.entity.RequestMessage;
 import liar.xiaoyu.www.entity.ResponseMessage;
 import liar.xiaoyu.www.entity.User;
 import liar.xiaoyu.www.service.UserService;
-import liar.xiaoyu.www.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -16,40 +16,44 @@ public class UserController {
     private final String url = "/User";
 
     @GetMapping(value = url+"s")
-    public ResponseMessage<List<User>> getAllUser(@RequestParam("manager") String name,@RequestParam("password")String password){
-        return userService.getAllUser();
+    public ResponseMessage<List<User>> getAllUser(@RequestBody RequestMessage<?> requestMessage){
+        ResponseMessage<List<User>> responseMessage = new ResponseMessage<>();
+        return responseMessage;
     }
 
     @PostMapping(value = url)
-    public ResponseMessage<Integer> addUser(@RequestBody User user){
-        user.setPassword(MD5Util.XMD5(user.getPassword()));
-        return userService.addUser(user);
+    public ResponseMessage<Integer> addUser(@RequestBody RequestMessage<User> requestMessage){
+        ResponseMessage<Integer> responseMessage = new ResponseMessage<>();
+        return responseMessage;
     }
 
     @PutMapping(value = url)
-    public ResponseMessage<Integer> updateUser(@RequestBody User user){
-        return userService.updateUserByID(user);
+    public ResponseMessage<Integer> updateUser(@RequestBody RequestMessage<User> requestMessage){
+        ResponseMessage<Integer> responseMessage = new ResponseMessage<>();
+        return responseMessage;
     }
 
     @DeleteMapping(value = url)
-    public ResponseMessage<Integer> deleteUser(@RequestParam("id") String postid){
-        Integer id = Integer.parseInt(postid);
-        return userService.deleteUserByID(id);
+    public ResponseMessage<Integer> deleteUser(@RequestBody RequestMessage<Integer> requestMessage){
+        ResponseMessage<Integer> responseMessage = new ResponseMessage<>();
+        return responseMessage;
     }
 
     @GetMapping(value = url)
-    public ResponseMessage<User> getUserByID(@RequestParam(value = "id") String postid){
-        Integer id = Integer.parseInt(postid);
-        return userService.getUserByID(id);
+    public ResponseMessage<User> getUserByID(@RequestBody RequestMessage<Integer> requestMessage){
+        ResponseMessage<User> responseMessage = new ResponseMessage<>();
+        return responseMessage;
     }
 
     @PostMapping("/ValidPhone")
-    public ResponseMessage<Integer> validPhone(@RequestParam("phone") String phone){
-        return userService.validationPhone(phone);
+    public ResponseMessage<Boolean> validPhone(@RequestBody RequestMessage<Integer> requestMessage){
+        ResponseMessage<Boolean> responseMessage = new ResponseMessage<>();
+        return responseMessage;
     }
 
     @PostMapping("ValidLogin")
-    public ResponseMessage<User> validPassword(@RequestParam("phone") String phone,@RequestParam("password") String password){
-        return userService.validationLogin(phone,password);
+    public ResponseMessage<User> validLogin(@RequestBody RequestMessage<Integer> requestMessage){
+        ResponseMessage<User> responseMessage = new ResponseMessage<>();
+        return responseMessage;
     }
 }

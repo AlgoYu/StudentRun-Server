@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 @Mapper
 public interface CommodityDao {
-    @Insert("INSERT INTO commodity VALUES(NULL,#{name},#{img},#{price},#{type},#{status});")
-    Integer addCommodity(Commodity commodity);
+    @Insert("INSERT INTO commodity(name,img,price,type,status) VALUES(#{name},#{img},#{price},#{type},#{status});")
+    Integer insertCommodity(Commodity commodity);
     @Delete("DELETE FROM commodity WHERE id = ${id};")
     Integer deleteCommodityByID(@Param("id")Integer id);
     @Update("UPDATE commodity SET name=#{name},img=#{img},price=#{price},type=#{type}," +

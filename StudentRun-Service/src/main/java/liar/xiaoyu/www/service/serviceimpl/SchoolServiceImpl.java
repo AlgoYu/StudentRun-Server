@@ -14,7 +14,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public Integer addSchool(School school) {
-        return schoolDao.addSchool(school);
+        return schoolDao.insertSchool(school);
     }
 
     @Override
