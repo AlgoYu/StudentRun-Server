@@ -2,9 +2,12 @@ package liar.xiaoyu.www.dao;
 
 import liar.xiaoyu.www.entity.CommodityType;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+@Mapper
 public interface CommodityTypeDao {
     /**
      * 功能：增加商品类型
@@ -27,13 +30,11 @@ public interface CommodityTypeDao {
     /**
      * 功能：更新商品类型
      * 参数：商品类型id,姓名
-     * @param id
-     * @param name
      * 返回值：更新行数
      * @return
      */
-    @Update("UPDATE commodity_type SET name='${name}' WHERE id = ${id};")
-    Integer updateCommodityTypeByID(@Param("id")Integer id,@Param("name")String name);
+    @Update("UPDATE commodity_type SET name=#{name} WHERE id = #{id};")
+    Integer updateCommodityTypeByID(CommodityType commodityType);
 
     /**
      * 功能：查询商品类型

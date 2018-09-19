@@ -2,8 +2,12 @@ package liar.xiaoyu.www.dao;
 
 import liar.xiaoyu.www.entity.OrderLog;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
+@Mapper
 public interface OrderLogDao {
     @Results(id = "OrderLogTable",value = {
             @Result(property = "id",column = "id"),
@@ -17,6 +21,9 @@ public interface OrderLogDao {
             "VALUES(#{orderUuid},#{commodity},#{money},#{number});")
     Integer addOrderLog(OrderLog orderLog);
 
+    @Delete("DELETE FROM order_log WHERE id = ${id}")
+    Integer deleteOrderLogByID(@Param("id") Integer id);
+
     @Delete("DELETE FROM order_log WHERE order_uuid = ${uuid}")
     Integer deleteOrderLogByUUID(@Param("uuid")String uuid);
 
@@ -28,9 +35,9 @@ public interface OrderLogDao {
     @ResultMap("OrderLogTable")
     OrderLog selectOrderLogByID(@Param("id")Integer id);
 
-    @Select("SELECT * FROM order_log WHERE id = ${orderUuid}")
+    @Select("SELECT * FROM order_log WHERE id = ${uuid}")
     @ResultMap("OrderLogTable")
-    List<OrderLog> selectOrderLogByUUID();
+    List<OrderLog> selectOrderLogByUUID(@Param("uuid")String uuid);
 
     @Select("SELECT * FROM order_log")
     @ResultMap("OrderLogTable")

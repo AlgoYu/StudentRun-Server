@@ -2,9 +2,12 @@ package liar.xiaoyu.www.dao;
 
 import liar.xiaoyu.www.entity.Commodity;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+@Mapper
 public interface CommodityDao {
     @Insert("INSERT INTO commodity VALUES(NULL,#{name},#{img},#{price},#{type},#{status});")
     Integer addCommodity(Commodity commodity);

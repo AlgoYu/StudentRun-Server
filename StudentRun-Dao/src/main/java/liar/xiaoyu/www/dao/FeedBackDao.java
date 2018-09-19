@@ -2,9 +2,12 @@ package liar.xiaoyu.www.dao;
 
 import liar.xiaoyu.www.entity.Feedback;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+@Mapper
 public interface FeedBackDao {
     @Insert("INSERT INTO feedback(uuid,type,content,status,reply) " +
             "VALUES(#{uuid},#{type},#{content},#{status},#{reply});")

@@ -3,18 +3,16 @@ package liar.xiaoyu.www.entity;
 
 public class CommodityType {
 
-  private long id;
+  private Integer id;
   private String name;
 
-
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
 
   public String getName() {
     return name;
@@ -23,5 +21,4 @@ public class CommodityType {
   public void setName(String name) {
     this.name = name;
   }
-
 }

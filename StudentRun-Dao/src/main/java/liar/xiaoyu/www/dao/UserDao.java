@@ -2,9 +2,11 @@ package liar.xiaoyu.www.dao;
 
 import liar.xiaoyu.www.entity.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 @Mapper
 public interface UserDao {
 

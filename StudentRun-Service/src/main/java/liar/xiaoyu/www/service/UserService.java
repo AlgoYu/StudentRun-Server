@@ -62,6 +62,13 @@ public interface UserService{
      * @return
      */
     ResponseMessage validationPhone(String phone);
-
+    /**
+     * 功能：校验登陆
+     * 参数：手机号码、密码
+     * @param phone
+     * @param password
+     * 返回值：返回类
+     * @return
+     */
     ResponseMessage validationLogin(String phone,String password);
 }

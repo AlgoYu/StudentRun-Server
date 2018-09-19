@@ -1,9 +1,9 @@
 package liar.xiaoyu.www.entity;
 
 public class ResponseMessage<V>{
-    public Boolean succes = false;
-    public String message = "暂无";
-    public V data;
+    private Boolean succes = false;
+    private String message = "暂无";
+    private V data;
 
     public Boolean getSucces() {
         return succes;

@@ -7,9 +7,6 @@ import liar.xiaoyu.www.service.UserService;
 import liar.xiaoyu.www.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Service

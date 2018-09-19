@@ -2,9 +2,12 @@ package liar.xiaoyu.www.dao;
 
 import liar.xiaoyu.www.entity.UserOrder;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+@Mapper
 public interface UserOrderDao {
     @Results(id = "UserOrderTable", value = {
             @Result(property = "id",column = "id"),
@@ -19,7 +22,7 @@ public interface UserOrderDao {
 
     @Insert("INSERT INTO user_order(order_uuid,user_id,money,staff,info,status) " +
             "VALUES(#{orderUuid},#{userId},#{money},#{staff},#{info},#{status});")
-    Integer addOrder();
+    Integer addOrder(UserOrder userOrder);
 
     @Delete("DELETE FROM user_order WHERE id = ${id}")
     Integer deleteOrderByID(@Param("id")Integer id);
